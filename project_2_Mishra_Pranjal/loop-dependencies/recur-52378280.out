@@ -1,0 +1,47 @@
+rm -f *.o recur_seq recur_omp
+/cluster/apps/gcc-4.8.5/gcc-11.4.0-xxnwhndqaqpuzs4l4ty4yj5tg2cexcg4/bin/gcc -c -O3 recur_seq.c
+/cluster/apps/gcc-4.8.5/gcc-11.4.0-xxnwhndqaqpuzs4l4ty4yj5tg2cexcg4/bin/gcc -c walltime.c
+/cluster/apps/gcc-4.8.5/gcc-11.4.0-xxnwhndqaqpuzs4l4ty4yj5tg2cexcg4/bin/gcc -O3 recur_seq.o walltime.o -o recur_seq
+/cluster/apps/gcc-4.8.5/gcc-11.4.0-xxnwhndqaqpuzs4l4ty4yj5tg2cexcg4/bin/gcc -O3 -fopenmp recur_omp.c walltime.o -lm -o recur_omp
+Running the Sequential Program
+Sequential RunTime:  7.662206 seconds
+Final Result Sn   :  485165097.62511122 
+Result ||opt||^2_2 :  5884629305179574.000000
+
+---------------------------------------------
+Running with OMP_NUM_THREADS=2
+Parallel RunTime  :  0.468264 seconds
+Final Result Sn   :  7.3890560091157873 
+Result ||opt||^2_2 :  13.399537
+
+---------------------------------------------
+Running with OMP_NUM_THREADS=4
+Parallel RunTime  :  0.285648 seconds
+Final Result Sn   :  7.3890560091184163 
+Result ||opt||^2_2 :  13.399537
+
+---------------------------------------------
+Running with OMP_NUM_THREADS=8
+Parallel RunTime  :  0.168647 seconds
+Final Result Sn   :  7.3890560091177599 
+Result ||opt||^2_2 :  13.399537
+
+---------------------------------------------
+Running with OMP_NUM_THREADS=16
+Parallel RunTime  :  0.116720 seconds
+Final Result Sn   :  7.3890560091169588 
+Result ||opt||^2_2 :  13.399537
+
+---------------------------------------------
+Running with OMP_NUM_THREADS=32
+Parallel RunTime  :  0.101026 seconds
+Final Result Sn   :  7.3890560091173505 
+Result ||opt||^2_2 :  13.399537
+
+---------------------------------------------
+Running with OMP_NUM_THREADS=64
+Parallel RunTime  :  0.078584 seconds
+Final Result Sn   :  7.3890560091172963 
+Result ||opt||^2_2 :  13.399537
+
+---------------------------------------------
