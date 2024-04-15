@@ -1,0 +1,5 @@
+Grid_Size,Num_Threads,Time_Spent
+64,1,simulation took 0.052425 seconds
+128,4,simulation took 0.173001 seconds
+256,16,simulation took 0.385998 seconds
+512,64,simulation took 3.89512 seconds

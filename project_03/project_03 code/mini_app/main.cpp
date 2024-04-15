@@ -24,6 +24,10 @@
 #include "walltime.h"
 #include "stats.h"
 
+#ifdef _OPENMP
+#include <omp.h>
+#endif
+
 using namespace data;
 using namespace linalg;
 using namespace operators;
@@ -105,10 +109,20 @@ int main(int argc, char* argv[]) {
     // get number of threads
     int threads = 1; // serial case
 
+    #ifdef _OPENMP
+    threads = omp_get_max_threads();
+    #endif
+    // threads = std::max(t, threads);
+
    // welcome message
     std::cout << std::string(80, '=') << std::endl;
     std::cout << "                      Welcome to mini-stencil!" << std::endl;
-    std::cout << "version   :: C++ Serial" << std::endl;
+    if (threads == 1)
+        std::cout << "version   :: C++ Serial" << std::endl;
+    else {
+        std::cout << "version   :: C++ OpenMP" << std::endl;
+        std::cout << "threads   :: " << threads << std::endl;
+    }
     std::cout << "mesh      :: " << options.nx << " * " << options.nx
                                  << " dx = " << options.dx << std::endl;
     std::cout << "time      :: " << nt << " time steps from 0 .. "
